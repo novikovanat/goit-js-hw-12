@@ -1,0 +1,112 @@
+@import "simplelightbox/dist/simple-lightbox.min.css";
+
+
+.gallery {
+    padding-top: 32px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    width: 1128px;
+}
+
+.gallery-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 200px;
+    border: 1px solid rgba(128, 128, 128, 1.0);
+    
+
+}
+
+.gallery-link {
+    /* cursor: url('../img/paw.svg'), auto; */
+}
+
+.gallery-image {
+    width: 360px;
+    height: 200px;
+}
+.info-box{
+    box-sizing: border-box;
+    display: flex;
+    gap:18px;
+    justify-content: center;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #808080;
+    border-top: none;
+    padding: 6px 0;
+        
+}
+
+
+.info-name, .info-value{
+    text-align: center;
+}
+.info-name{
+    font-weight: 600;
+    
+}
+
+.button{
+    width: 75px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #4E75FF;
+    border: none;
+    color: #fff;
+    margin-left: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 24px;
+}
+.button:hover{
+    background-color: #6C8CFF;
+}
+
+.focus{
+    width: 272px;
+    height: 40px;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    padding-left:16px ;
+}
+
+.focus::placeholder{
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.focus:focus{
+    outline: 1px solid #4E75FF;
+}
+
+.focus:hover
+{
+border:1px solid #000 ;
+}
+
+.form{
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.sl-wrapper .sl-navigation button.sl-prev,
+.sl-wrapper .sl-navigation button.sl-next,
+.sl-wrapper .sl-counter,
+.sl-wrapper .sl-close {
+    color: #fff;
+}
+
+.sl-overlay {
+    background: #2E2F42;
+}
+
