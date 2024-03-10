@@ -21,12 +21,8 @@ function submitHandler(event){
         invokeNotification(note)
         }
     else {
-        fetchPhotos(searchPrase)
-        .then((response) => {
-           const photosObject = responseCheck(response)
-                    return photosObject
-            })
-        .then(({total, hits}) => { 
+       fetchPhotos(searchPrase)
+        .then(({data: {total, hits}}) => { 
             totalCheck(total,hits)
         })
         .catch((error) => console.log(error));
@@ -35,6 +31,7 @@ function submitHandler(event){
         
     form.reset()
 }
+
 
 function totalCheck(total,hits){
     if (total>0){
