@@ -15,11 +15,10 @@ form.addEventListener("submit", submitHandler)
 
 let page;
 let searchPrase;
-let maxPage;
+
 
 
 function submitHandler(event){
-    loadMoreBtn.classList.add("is-hidden")
     event.preventDefault()
     resetMarkup(" ")
     let inputPrase = event.currentTarget.elements.search.value;
@@ -51,9 +50,8 @@ function totalCheck(photosObject){
     photosObject.then((response) => {
         const {total, hits} = response
     if (total>0){
-        console.log(total)
         let imageGallary = createMarkup(hits)
-        maxPage = Math.ceil(total/15)
+        let maxPage = Math.ceil(total/15)
         console.log("maxPage, page ", maxPage, page)
           if (maxPage <= page){
             loadMoreBtn.classList.add('is-hidden')
