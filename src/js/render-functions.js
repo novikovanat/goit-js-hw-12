@@ -1,5 +1,5 @@
 // function for render pictures
-export { createMarkup, addMarkup };
+export { createMarkup, resetMarkup, addMarkupNew };
 const gallery = document.querySelector('.gallery');
 
 function createMarkup(images){
@@ -38,6 +38,10 @@ const imageGallary = images
 return imageGallary
 }
 
-function addMarkup(string){
+function resetMarkup(string){
     gallery.innerHTML= string;
+}
+
+function addMarkupNew(string){
+  gallery.insertAdjacentHTML("beforeend", string)
 }

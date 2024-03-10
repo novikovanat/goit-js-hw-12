@@ -1,4 +1,4 @@
-import {createMarkup, addMarkup } from "./js/render-functions";
+import {createMarkup, resetMarkup, addMarkupNew} from "./js/render-functions";
 import fetchPhotos from "./js/pixabay-api";
 import errorSvg from './img/error.svg'
 import iziToast from 'izitoast';
@@ -20,6 +20,7 @@ let maxPage;
 
 function submitHandler(event){
     event.preventDefault()
+    resetMarkup(" ")
     let inputPrase = event.currentTarget.elements.search.value;
     if (inputPrase.trim() === '')
     {
@@ -55,15 +56,16 @@ function totalCheck(photosObject){
     if (total>0){
         maxPage = Math.ceil(total/15)
         let imageGallary = createMarkup(hits)
-        addMarkup(imageGallary);
+        addMarkupNew(imageGallary);
         galleryLook.refresh()
        } 
            else{
        const note = "Sorry, there are no images matching your search query. Please try again!"
        const startMarkup = `<li><span class="loader-css"></span></li>`;
-       addMarkup(startMarkup);
+       resetMarkup(startMarkup);
        invokeNotification(note)
        }
+    loader.classList.remove("loader")
 })
 .catch((error) => console.log(error));
 }
