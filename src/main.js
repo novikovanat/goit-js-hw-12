@@ -6,7 +6,7 @@ import simpleLightbox from "simplelightbox";
 
 
 const form = document.querySelector('form')
-const loader = document.querySelector('.loader-css')
+const loader = document.querySelector('.container')
 const loadMoreBtn =document.querySelector('.load-button')
 const galleryLook = new simpleLightbox('.gallery a')
 
@@ -19,6 +19,7 @@ let maxPage;
 
 
 function submitHandler(event){
+    loadMoreBtn.classList.add("is-hidden")
     event.preventDefault()
     resetMarkup(" ")
     let inputPrase = event.currentTarget.elements.search.value;
@@ -31,20 +32,16 @@ function submitHandler(event){
         searchPrase = inputPrase;
         page = 1;
         const photos = fetchPhotos(searchPrase, page);
-        loader.classList.add("loader")
-        totalCheck(photos);
+        loader.classList.remove("is-hidden")
+        totalCheck(photos)
     form.reset()
 }}
 
 
  function clickHandler(){
-    if (page >= maxPage) {
-        let note = "We're sorry, there are no more posts to load"
-        return invokeNotification(note)
-    }
         page+=1;
         const photos = fetchPhotos(searchPrase, page)
-        loader.classList.add("loader")
+        loader.classList.remove("is-hidden")
         totalCheck(photos)
       }
     
@@ -54,8 +51,19 @@ function totalCheck(photosObject){
     photosObject.then((response) => {
         const {total, hits} = response
     if (total>0){
-        maxPage = Math.ceil(total/15)
+        console.log(total)
         let imageGallary = createMarkup(hits)
+        maxPage = Math.ceil(total/15)
+        console.log("maxPage, page ", maxPage, page)
+          if (maxPage <= page){
+            loadMoreBtn.classList.add('is-hidden')
+            let note = "We're sorry, there are no more posts to load"
+            invokeNotification(note)
+        }
+          else{ 
+            loadMoreBtn.classList.remove('is-hidden')
+            
+        }
         addMarkupNew(imageGallary);
         galleryLook.refresh()
        } 
@@ -65,7 +73,7 @@ function totalCheck(photosObject){
        resetMarkup(startMarkup);
        invokeNotification(note)
        }
-    loader.classList.remove("loader")
+    loader.classList.add("is-hidden")
 })
 .catch((error) => console.log(error));
 }
