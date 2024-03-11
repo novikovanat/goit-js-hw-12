@@ -20,6 +20,7 @@ let searchPrase;
 
 function submitHandler(event){
     event.preventDefault()
+    loadMoreBtn.classList.add('is-hidden')
     resetMarkup(" ")
     let inputPrase = event.currentTarget.elements.search.value;
     if (inputPrase.trim() === '')
@@ -38,6 +39,7 @@ function submitHandler(event){
 
 
  function clickHandler(){
+    loadMoreBtn.classList.add('is-hidden')
         page+=1;
         const photos = fetchPhotos(searchPrase, page)
         loader.classList.remove("is-hidden")
@@ -59,7 +61,9 @@ function totalCheck(photosObject){
             invokeNotification(note)
         }
           else{ 
-            loadMoreBtn.classList.remove('is-hidden')
+            setTimeout(() => { loadMoreBtn.classList.remove('is-hidden')
+	
+}, 3000);
             
         }
         addMarkupNew(imageGallary);
