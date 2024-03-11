@@ -56,16 +56,15 @@ function totalCheck(photosObject) {
       const { total, hits } = response;
       if (total > 0) {
         let imageGallary = createMarkup(hits);
-        let maxPage = Math.ceil(total / 15);
+        const PER_PAGE = 15;
+        let maxPage = Math.ceil(total / PER_PAGE);
         if (maxPage <= page) {
           loadMoreBtn.classList.add('is-hidden');
           let note =
             "We're sorry, but you've reached the end of search results.";
           invokeNotification(note);
         } else {
-          scrollToPage;
-            loadMoreBtn.classList.remove('is-hidden');
-          
+          loadMoreBtn.classList.remove('is-hidden');
         }
         addMarkupNew(imageGallary);
         scrollToPage();
@@ -77,9 +76,12 @@ function totalCheck(photosObject) {
         resetMarkup(startMarkup);
         invokeNotification(note);
       }
-      loader.classList.add('is-hidden');
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      let note = error;
+      invokeNotification(note);
+    })
+    .finally(() => loader.classList.add('is-hidden'));
 }
 
 function invokeNotification(message) {
