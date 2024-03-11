@@ -16,7 +16,15 @@ form.addEventListener("submit", submitHandler)
 let page;
 let searchPrase;
 
-
+function scrollToPage() {
+    const galleryItem = document.querySelector('.gallery-item')
+    let galleryItemSize = galleryItem.getBoundingClientRect();
+    console.log("gallery-item-size",galleryItemSize)
+    window.scrollBy({
+        top: 2* galleryItemSize.height,
+        behavior: "smooth",
+      });
+}
 
 function submitHandler(event){
     event.preventDefault()
@@ -54,19 +62,20 @@ function totalCheck(photosObject){
     if (total>0){
         let imageGallary = createMarkup(hits)
         let maxPage = Math.ceil(total/15)
-        console.log("maxPage, page ", maxPage, page)
           if (maxPage <= page){
             loadMoreBtn.classList.add('is-hidden')
             let note = "We're sorry, there are no more posts to load"
             invokeNotification(note)
         }
           else{ 
+            scrollToPage
             setTimeout(() => { loadMoreBtn.classList.remove('is-hidden')
 	
 }, 3000);
             
         }
         addMarkupNew(imageGallary);
+        scrollToPage()
         galleryLook.refresh()
        } 
            else{
