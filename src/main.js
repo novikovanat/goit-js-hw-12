@@ -19,7 +19,6 @@ let searchPrase;
 function scrollToPage() {
     const galleryItem = document.querySelector('.gallery-item')
     let galleryItemSize = galleryItem.getBoundingClientRect();
-    console.log("gallery-item-size",galleryItemSize)
     window.scrollBy({
         top: 2* galleryItemSize.height,
         behavior: "smooth",
@@ -64,7 +63,7 @@ function totalCheck(photosObject){
         let maxPage = Math.ceil(total/15)
           if (maxPage <= page){
             loadMoreBtn.classList.add('is-hidden')
-            let note = "We're sorry, there are no more posts to load"
+            let note = "We're sorry, but you've reached the end of search results."
             invokeNotification(note)
         }
           else{ 
